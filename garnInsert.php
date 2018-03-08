@@ -29,8 +29,8 @@ or
 die(mysqli_error($connection)); 
 echo "$nameManuf och $material har nu lagts till i databasen. ";
 
-include 'garnView.php';
+// include 'garnView.php';
 // Gå tillbaka till garnsidan, filen garn.php
-// header('Location: garn.php');
+header('Location: update.php');
 
 ?>

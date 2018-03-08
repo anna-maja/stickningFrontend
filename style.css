@@ -5,3 +5,14 @@ header {
 .th {
     background-color: gainsboro;
 }
+.linkUpdate {
+    background-color: rgba(195, 247, 229, 0.445);
+}
+.h5Update{
+    background-color:rgb(240, 235, 235);
+    padding: 0.8rem;
+}
+.formUpdate{
+    padding: 0.8rem;
+}
+

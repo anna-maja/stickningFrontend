@@ -1,21 +1,37 @@
-<!-- Uppkopplad mot databasen med connect.php i header. -->
-
 <?php
-define ("PAGE_TITLE", "Mottagare");
-include 'header.php';
-?>
 
-<header class="header text-center">
-    <div class="container">
-    <h1 class="text-uppercase mb-0"><?=PAGE_MOTTAGARE?></h1>
-    <hr>
-    </div>
-</header>
+include 'connect.php';
 
-<?php
-include 'navigation.php';
-?>
-<br>
-<?php
-    include 'mottagareView.php';
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+
+if (isset($_POST['namn'])) {
+    $namn = $_POST['namn']; // nyckelvärdet för namninmatningen
+}
+if (isset($_POST['kontakt'])) {
+    $kontakt = $_POST['kontakt']; // nyckelvärdet för namninmatningen
+}
+
+
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
+
+// detta förbereder sql-satsen
+$sql = 
+    "INSERT INTO mottagare VALUES ('', '$namn', '$kontakt')";
+echo $sql;
+
+// exekverar sql-satsen = funktionen körs med connection coh variabeln som innehåller insert-satsen
+// or die == visar felmeddelande och avbryter kodkörningen.
+mysqli_query($connection, $sql) 
+or 
+die(mysqli_error($connection)); 
+// echo "$nameManuf och $material har nu lagts till i databasen. ";
+
+// include 'garnView.php';
+// Gå tillbaka till garnsidan, filen garn.php
+header('Location: update.php');
+
 ?>

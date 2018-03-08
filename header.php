@@ -6,7 +6,9 @@
     define("PAGE_KATEGORI", "Samtliga kategorier");
     define("PAGE_ITEM", "Samtliga modelltyper");
     define("PAGE_MOTTAGARE", "Samtliga mottagare");
-    define("PAGE_ALSTER", "Stickalster, all info"); 
+    define("PAGE_ALSTER", "Stickalster, sammanfattning"); 
+    define("PAGE_ALSTEREXT", "Stickalster, all info"); 
+    define("PAGE_UPDATE", "Uppdatera stickning"); 
 ?>
 
 <!doctype html>

@@ -20,7 +20,7 @@ include 'navigation.php';
 <?php
 //detta formulerar frågan == vad som skall visas
 $query =
-"SELECT * FROM 'mottagare-modell-garn-färg'";
+"SELECT * FROM ";
 
 // detta exekverar == kör satsen och hämtar värdena
 $table = mysqli_query($connection,$query)
@@ -29,7 +29,7 @@ or die(mysqli_error($connection));
 
 <!-- Startar tabellen, med format från bootstrap -->
 <table class="table">
-namn modelltyp garn färg
+
     <!-- Första raden == rubrikerna i kolumnerna. -->
     <tr style="background-color:gainsboro"> 
     <th>Mottagare</th> 
@@ -41,9 +41,10 @@ namn modelltyp garn färg
 <!-- Startar while == det som lägger in värdena i kolumnerna. -->
     <?php while($row = $table->fetch_assoc()): ?>
     <tr>
-    <td><?=$row[''] ?></td>
-    <td><?=$row['nameManuf'] ?> </td>
-    <td><?=$row['material'] ?> </td>
+    <td><?=$row['namn'] ?></td>
+    <td><?=$row['modellTyp'] ?> </td>
+    <td><?=$row['garn'] ?> </td>
+    <td><?=$row['färg'] ?> </td>
     
     <td>
     <?php endwhile?>

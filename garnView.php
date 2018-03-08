@@ -1,9 +1,27 @@
+<!-- Kopplar upp mig mot databasen via connect.php som ligger i header -->
+
+<?php
+define ("PAGE_TITLE", "Garn");
+include 'header.php';
+?>
+
+<header class="header text-center">
+    <div class="container">
+    <h1 class="text-uppercase mb-0"><?=PAGE_GARN?></h1>
+    <hr>
+    </div>
+</header>
+
+<?php
+include 'navigation.php';
+?>
 
 <?php
 //detta formulerar frågan == vad som skall visas
 $query =
 "SELECT ID, nameManuf, material
-FROM garn";
+FROM garn 
+ORDER BY ID ASC";
 
 // detta exekverar == kör satsen och hämtar värdena
 $table = mysqli_query($connection,$query)
