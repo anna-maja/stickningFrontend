@@ -13,13 +13,7 @@
     if (isset($_POST['modellTyp'])) {
         $itemID = $_POST['modellTyp']; // nyckelvärdet för namninmatningen
     }
-    // if (isset($_POST['garn'])) {
-    //     $garnID = $_POST['garn']; // nyckelvärdet för namninmatningen
-    // }
-    // if (isset($_POST['färg'])) {
-    //     $fargNamn = $_POST['färg']; // nyckelvärdet för namninmatningen
-    // }
-    if (isset($_POST['teknik'])) {
+        if (isset($_POST['teknik'])) {
         $teknik = $_POST['teknik']; // nyckelvärdet för namninmatningen
     }
     if (isset($_POST['feature'])) {
