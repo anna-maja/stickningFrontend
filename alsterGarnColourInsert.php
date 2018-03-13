@@ -18,12 +18,14 @@ if (isset($_POST['nameManuf'])) {
 if (isset($_POST['fargNamn'])) {
     $fargNamn = $_POST['fargNamn']; // nyckelvärdet för namninmatningen
 }
-if (isset($_POST['gcId'])) {
-    $gcId = $_POST['gcId']; // nyckelvärdet för namninmatningen
-}
 if (isset($_POST['alsterId'])) {
     $alsterId = $_POST['alsterId']; // nyckelvärdet för namninmatningen
 }
+if (isset($_POST['gcID'])) {
+    $gcID = $_POST['gcID']; // nyckelvärdet för namninmatningen
+}
+
+
 
 echo "<pre>";
 print_r($_POST);
@@ -31,7 +33,7 @@ echo "</pre>";
 
 // // detta förbereder sql-satsen
 $sql = 
-    "INSERT INTO alster_has_garn_has_colour VALUES ('','$alsterId', '$gcId')";
+    "INSERT INTO alster_has_garn_has_colour VALUES ('', '$alsterId', '$gcID')";
 
     echo $sql;
 

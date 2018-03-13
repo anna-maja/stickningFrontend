@@ -50,5 +50,5 @@
     die(mysqli_error($connection)); 
 
     // Gå tillbaka till update
-    header('Location: update.php');
+    // header('Location: update.php');
 ?>

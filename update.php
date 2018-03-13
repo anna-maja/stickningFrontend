@@ -312,8 +312,8 @@
             while ($row = $table->fetch_assoc()) {     
                 $nameManuf = $row["nameManuf"];
                 $fargNamn = $row["fargNamn"];
-                $gcID = $row ["gcID"];
-                echo '<OPTION value="' . $gcID .' ">' . $nameManuf . ', ' . $fargNamn .'</OPTION>'; 
+                $gcID = $row ["ID"];
+                echo '<OPTION value="' . $gcID .'">' . $nameManuf . ', ' . $fargNamn .'</OPTION>'; 
             } 
             echo '</SELECT>';
         ?>
