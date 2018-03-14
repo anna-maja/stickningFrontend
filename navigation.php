@@ -56,8 +56,8 @@
     <div class="card">
         <img class="card-img-top">
         <div class="card-body" style="text-align:center">
-            <h5 class="card-title">Stickalster, kortfattat</h5> 
-            <a href="alsterView.php" class="btn btn-outline-info">kort om alster</a>
+            <h5 class="card-title">Stickalster utan garn</h5> 
+            <a href="alsterUtanGarn.php" class="btn btn-outline-info">Namn och modelltyp</a>
         </div>
     </div>
 

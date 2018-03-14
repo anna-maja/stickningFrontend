@@ -66,20 +66,20 @@
         
     <!-- Lista för att välja garn -->
         <?php
-            $sql = "SELECT DISTINCT * FROM garn";
+            $sql = "SELECT DISTINCT *
+            FROM garn
+            ORDER BY
+            nameManuf ASC";
             
             $table = mysqli_query($connection, $sql); 
             
             echo '<select name="garn">'; 
-
             echo "<OPTION>Välj garn</OPTION>"; 
             
             while ($row = $table->fetch_assoc()) { 
-            
-            $nameManuf = $row["nameManuf"];
-            $id = $row["ID"];
-
-            echo '<OPTION value="' . $id . '">' . $nameManuf . '</OPTION>'; 
+                $nameManuf = $row["nameManuf"];
+                $id = $row["ID"];
+                echo '<OPTION value="' . $id . '">' . $nameManuf . '</OPTION>'; 
             } 
             echo '</SELECT>';
         ?>
@@ -89,7 +89,7 @@
             
             $table = mysqli_query($connection, $sql); 
             
-            echo '<select name="färg">'; 
+            echo '<select name="fargNamn">'; 
             echo "<OPTION>Välj färg</OPTION>"; 
             
             while ($row = $table->fetch_assoc()) { 
@@ -171,7 +171,10 @@
         
         <!-- Lista för att välja mottagare -->
         <?php
-            $sql = "SELECT DISTINCT * FROM mottagare";
+            $sql = "SELECT DISTINCT * 
+            FROM mottagare
+            ORDER BY 
+            namn ASC";
             
             $table = mysqli_query($connection, $sql); 
             
@@ -187,7 +190,9 @@
         ?>
         <!-- Lista för att välja modell -->
         <?php
-            $sql = "SELECT DISTINCT * FROM item";
+            $sql = "SELECT DISTINCT * 
+            FROM item
+            ORDER BY modellTyp ASC";
             
             $table = mysqli_query($connection, $sql); 
             
@@ -201,7 +206,7 @@
             } 
             echo '</SELECT>';
         ?>
-
+        
         <label for="teknik">Teknik</label>
         <input type="text" id="teknik" class="form-control mx-2" name ="teknik">
 
@@ -224,16 +229,15 @@
             Lägg till
         </button>
     </form>
+</div>
 
     <!-- Koppla alster och garn/färg -->
-    <div id="addAHG">
+<div id="addAHG">
     <h5  class="h5Update">Koppla ett alster till garner - välj från menyer.</h5>
     1: välj mottagare (namn), 2: välj bland dens alster, 3: välj garn (nameManuf), 4: välj bland dess färger
 
     <form action="alsterGarnColourInsert.php" method="post" class="form-inline formUpdate"> 
     <!-- Lista för att välja mottagare och item (från alster-listan) -->
-
-    <!-- Lista för att välja alster: mottagare, modell -->
     <?php
             $sql = 
             "SELECT DISTINCT 
@@ -242,7 +246,9 @@
             mottagare AS m, item AS i, alster AS a 
             WHERE 
             a.Mottagare_ID = m.ID AND 
-            a.Item_ID = i.ID";
+            a.Item_ID = i.ID AND
+            a.inclColour = '0'
+            ORDER BY namn ASC";
             
             $table = mysqli_query($connection, $sql); 
             
@@ -256,101 +262,36 @@
                 echo '<OPTION value="' . $alsterId . '">' . $namn . ', ' . $modellTyp. '</OPTION>'; 
             } 
             echo '</SELECT>';
-        ?>
-        <?php
-            // $sql = "SELECT DISTINCT m.namn 
-            // FROM alster AS a, mottagare AS m 
-            // WHERE a.Mottagare_ID = m.ID";
-            
-            // $table = mysqli_query($connection, $sql); 
-            
-            // echo '<select name="namn">'; 
-            // echo "<OPTION>Välj mottagare</OPTION>"; 
-            
-            // while ($row = $table->fetch_assoc()) { 
-            //     $namn = $row["namn"];
-            //     $id = $row["ID"];
-            //     echo '<OPTION value="' . $id . '">' . $namn . '</OPTION>'; 
-            // } 
-            // echo '</SELECT>';
-        ?>
-        <!-- Lista för att välja vilken av dens stickningar -->
-        <?php
-            // $sql = 
-            // "SELECT i.modellTyp 
-            // FROM alster AS a, item AS i 
-            // WHERE a.Item_ID = i.ID AND a.Mottagare_ID = 1";
-            
-            // $table = mysqli_query($connection, $sql); 
-            
-            // echo '<select name="modellTyp">'; 
-            // echo "<OPTION>Välj modell</OPTION>"; 
-            
-            // while ($row = $table->fetch_assoc()) { 
-            //     $modellTyp = $row["modellTyp"];
-            //     $id = $row["ID"];
-            //     echo '<OPTION value="' . $id . '">' . $modellTyp . '</OPTION>'; 
-            // } 
-            // echo '</SELECT>';
-        ?>
-        
+    ?>
         <!-- Lista för att välja garn -->
         <?php
-            $sql = 
-            "SELECT 
-            g.nameManuf, c.fargNamn, gc.ID 
-            FROM 
-            garn_has_colour AS gc, garn AS g, colour AS c
-            WHERE 
-            gc.Garn_ID = g.ID AND gc.fargNamn = c.fargNamn";
+                $sql = 
+                "SELECT 
+                g.nameManuf, c.fargNamn, gc.ID 
+                FROM 
+                garn_has_colour AS gc, garn AS g, colour AS c
+                WHERE 
+                gc.Garn_ID = g.ID AND gc.fargNamn = c.fargNamn
+                ORDER BY 
+                g.nameManuf, c.fargNamn 
+                ";
+                
+                $table = mysqli_query($connection, $sql); 
+                
+                echo '<select name="gcID">'; 
+                echo "<OPTION>Välj garn och färg</OPTION>"; 
             
-            $table = mysqli_query($connection, $sql); 
-            
-            echo '<select name="gcID">'; 
-            echo "<OPTION>Välj garn och färg</OPTION>"; 
-        
-            while ($row = $table->fetch_assoc()) {     
-                $nameManuf = $row["nameManuf"];
-                $fargNamn = $row["fargNamn"];
-                $gcID = $row ["ID"];
-                echo '<OPTION value="' . $gcID .'">' . $nameManuf . ', ' . $fargNamn .'</OPTION>'; 
-            } 
-            echo '</SELECT>';
+                while ($row = $table->fetch_assoc()) {     
+                    $nameManuf = $row["nameManuf"];
+                    $fargNamn = $row["fargNamn"];
+                    $gcID = $row ["ID"];
+                    echo '<OPTION value="' . $gcID .'">' . $nameManuf . ', ' . $fargNamn .'</OPTION>'; 
+                } 
+                echo '</SELECT>';
         ?>
-
-        <!-- Välj färg från garnets färger (ghc) -->
-        <?php
-            // $sql = "SELECT DISTINCT c.fargNamn
-            // FROM colour AS c, garn_has_colour AS ghc
-            
-            // WHERE
-            // ghc.Garn_ID = 1AND
-            // ghc.fargNamn = c.fargNamn;";
-            
-            // $table = mysqli_query($connection, $sql); 
-            
-            // echo '<select name="garn">'; 
-            // echo "<OPTION>Välj garn</OPTION>"; 
-            
-            // while ($row = $table->fetch_assoc()) { 
-            
-            // $nameManuf = $row["nameManuf"];
-            // $id = $row["ID"];
-
-            // echo '<OPTION value="' . $id . '">' . $nameManuf . '</OPTION>'; 
-            // } 
-            // echo '</SELECT>';
-        ?>
-        <!-- Lista för att välja färg -->
         <button class="btn btn-outline-primary" type="submit">
             Lägg till
         </button>
     </form>
-    
-</div>
-
-<!-- 
-    SELECT DISTINCT g.nameManuf FROM garn AS g, garn_has_colour AS ghc WHERE ghc.Garn_ID = g.ID
- -->
 </div>
 
